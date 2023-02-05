@@ -1,8 +1,14 @@
 {% extends 'blog/base.html' %}
 {% load static %}
 {% block content %}
+{% if user.is_authenticated %}
+    <a href="{% url 'post_new' %}" style="text-decoration: underline; color: blue;" class="top-menu">
+        <span class="glyphicon glyphicon-plus">  
+        </span>New Post</a>
+    {% endif %}
     {% for post in posts %}
-    <div>     
+    <div>
+             
         <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
         <p>Published: {{ post.publish_date }} by {{ post.author }}</p>
         <p>{{ post.text|linebreaksbr|truncatewords:50 }}</p>
